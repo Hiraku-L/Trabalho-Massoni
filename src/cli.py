@@ -13,7 +13,7 @@ def main(argv: list[str] | None = None):
     )
     parser.add_argument(
         "--rsa-bits",
-        help="Tamnho da chave rsa em bits",
+        help="Tamanho da chave rsa em bits",
         default=RSA
     )
     parser.add_argument(
@@ -37,4 +37,3 @@ def main(argv: list[str] | None = None):
 
 def __print_resultado(resultados):
     return
-
