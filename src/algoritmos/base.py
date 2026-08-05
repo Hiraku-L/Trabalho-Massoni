@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class KeyPair():
-    chave_public: Any
+    chave_publica: Any
     chave_privada: Any
 
 class AlgoritmoBase(ABC):

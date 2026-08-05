@@ -43,7 +43,8 @@ class Gm(AlgoritmoBase):
             if bit:
                 c = (c*chave_publica.x) % chave_publica.n
 
-        texto_cifrado.append(c)
+            texto_cifrado.append(c)
+        return texto_cifrado
         
     def decifrar(self, texto_cifrado: bytes, chave_privada: ChavePrivadaGm) -> bytes:
         bits = []

@@ -4,11 +4,11 @@ from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 
-from .base import AlgorithmAdapter, KeyPair
+from .base import AlgoritmoBase, KeyPair
 from ..utils.separador_bytes import iterador_blocos
 
 
-class Rsa():
+class Rsa(AlgoritmoBase):
     name = "RSA";
 
     def __init__(self, bits = 1024):
