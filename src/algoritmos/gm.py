@@ -1,0 +1,2 @@
+class Gm():
+    name = "GM"
