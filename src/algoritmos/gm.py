@@ -17,7 +17,6 @@ class ChavePrivadaGm:
     p: int
     q: int
 
-# cifra bit por bit com base na intratabilidade assumida do problema de residuosidade quadrática módulo a composto n = p * q onde p, q são grandes primos.
 class Gm(AlgoritmoBase):
     name = "GM"
 

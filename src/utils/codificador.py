@@ -9,8 +9,8 @@ from ..algoritmos.gm import ChavePrivadaGm, ChavePublicaGm
 
 def serializar_cifrado(algoritmo_nome: str, cifrado) -> str:
     if algoritmo_nome == "GM":
-        return json.dumps(cifrado)          # list[int] -> JSON
-    return base64.b64encode(cifrado).decode("ascii")  # bytes -> base64 texto
+        return json.dumps(cifrado)
+    return base64.b64encode(cifrado).decode("ascii")
 
 def desserializar_cifrado(algoritmo_nome: str, texto: str):
     if algoritmo_nome == "GM":
