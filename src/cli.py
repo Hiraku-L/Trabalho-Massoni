@@ -1,4 +1,6 @@
 import argparse
+import csv
+from dataclasses import asdict
 from .utils.constantes import TAMANHOS, RSA, GM, ALGORITMOS
 from .comparador.comparador import comparar
 
@@ -13,7 +15,7 @@ def main(argv: list[str] | None = None):
     )
     parser.add_argument(
         "--rsa-bits",
-        help="Tamnho da chave rsa em bits",
+        help="Tamanho da chave rsa em bits",
         default=RSA
     )
     parser.add_argument(
@@ -33,8 +35,13 @@ def main(argv: list[str] | None = None):
 
     resultados = comparar(args.sizes, args.rsa_bits, args.gm_bits, ALGORITMOS, args.repetitions)
 
-    __print_resultado(resultados)
+    __salvar_resultado(resultados)
 
-def __print_resultado(resultados):
-    return
+def __salvar_resultado(resultados):
+    with open("benchmark.csv", "w", newline="") as arquivo:
+        wr = csv.DictWriter(arquivo, fieldnames=asdict(resultados[0]).keys())
 
+        wr.writeheader()
+
+        for resultado in resultados:
+            wr.writerow(asdict(resultado))
