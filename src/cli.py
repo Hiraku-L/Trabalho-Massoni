@@ -46,10 +46,19 @@ def main(argv: list[str] | None = None):
     __salvar_resultado(resultados)
 
 def __salvar_resultado(resultados):
-    with open("benchmark.csv", "w", newline="") as arquivo:
-        wr = csv.DictWriter(arquivo, fieldnames=asdict(resultados[0]).keys())
+    with open("benchmark.csv", "w", newline="", encoding="utf-8") as arquivo:
+        wr = csv.writer(arquivo)
 
-        wr.writeheader()
+        wr.writerow([
+            "Algoritmo",
+            "Entrada(bytes)",
+            "Tempo de geração de chaves(ms)",
+            "Tempo médio de encriptação(ms)",
+            "Desvio padrão de encriptação(ms)",
+            "Tempo médio de decriptação(ms)",
+            "Desvio padrão da decriptação(ms)",
+            "Texto cifrado(bytes)"
+        ])
 
         for resultado in resultados:
-            wr.writerow(asdict(resultado))
+            wr.writerow(asdict(resultado).values())
