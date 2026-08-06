@@ -1,11 +1,14 @@
 import argparse
 import csv
+import pandas as pd
 from dataclasses import asdict
 from .utils.constantes import TAMANHOS, RSA, GM
 from .comparador.comparador import comparar
 from .algoritmos.des import Des
 from .algoritmos.rsa import Rsa
 from .algoritmos.gm import Gm
+from .gerar_graficos.encriptacao import grafico_encriptacao
+from .gerar_graficos.decriptacao import grafico_decriptacao
 
 def main(argv: list[str] | None = None):
     parser = argparse.ArgumentParser()
@@ -44,6 +47,11 @@ def main(argv: list[str] | None = None):
     resultados = comparar(args.sizes, algoritmos, args.repetitions)
 
     __salvar_resultado(resultados)
+
+    df = pd.read_csv("benchmark.csv")
+
+    grafico_encriptacao(df)
+    grafico_decriptacao(df)
 
 def __salvar_resultado(resultados):
     with open("benchmark.csv", "w", newline="", encoding="utf-8") as arquivo:
