@@ -10,8 +10,8 @@ def calcula_media_e_desvio_padrao(funcao, repeticoes):
         tempo = medir_tempo(funcao)
         tempos.append(tempo)
 
-    media = np.mean(tempos)
-    desvio_padrao = np.std(tempos)
+    media = round(np.mean(tempos), 4)
+    desvio_padrao = round(np.std(tempos), 4)
 
     return media, desvio_padrao
 
@@ -22,15 +22,14 @@ def medir_tempo(funcao):
 
     duracao = fim - inicio
 
-    return duracao
+    return round(duracao * 1000, 4)
 
 def comparar(tamanhos, algoritmos, repeticoes):
     resultados = []
 
     for algoritmo in algoritmos:
         chaves = algoritmo.gerar_chaves()
-        tempos_geracao_de_chaves = calcula_media_e_desvio_padrao(lambda: algoritmo.gerar_chaves(), repeticoes)
-        media_geracao_de_chaves, desvio_padrao_geracao_de_chaves = tempos_geracao_de_chaves
+        tempo_geracao_de_chaves = medir_tempo(lambda: algoritmo.gerar_chaves())
 
         for tamanho in tamanhos:
             texto = os.urandom(tamanho)
@@ -48,8 +47,7 @@ def comparar(tamanhos, algoritmos, repeticoes):
                 Resultado(
                     algoritmo= algoritmo.name,
                     tamanho_entrada= tamanho,
-                    media_geracao_de_chaves= media_geracao_de_chaves,
-                    desvio_padrao_geracao_de_chaves= desvio_padrao_geracao_de_chaves,
+                    tempo_geracao_de_chaves= tempo_geracao_de_chaves,
                     media_encriptacao= media_encriptacao,
                     desvio_padrao_encriptacao= desvio_padrao_encriptacao,
                     media_decriptacao= media_decriptacao,
