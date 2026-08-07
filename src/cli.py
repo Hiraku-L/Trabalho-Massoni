@@ -1,11 +1,14 @@
 import argparse
 import csv
+import pandas as pd
 from dataclasses import asdict
 from .utils.constantes import TAMANHOS, RSA, GM
 from .comparador.comparador import comparar
 from .algoritmos.des import Des
 from .algoritmos.rsa import Rsa
 from .algoritmos.gm import Gm
+from .gerar_graficos.encriptacao import grafico_encriptacao
+from .gerar_graficos.decriptacao import grafico_decriptacao
 
 def main(argv: list[str] | None = None):
     parser = argparse.ArgumentParser()
@@ -45,11 +48,25 @@ def main(argv: list[str] | None = None):
 
     __salvar_resultado(resultados)
 
-def __salvar_resultado(resultados):
-    with open("benchmark.csv", "w", newline="") as arquivo:
-        wr = csv.DictWriter(arquivo, fieldnames=asdict(resultados[0]).keys())
+    df = pd.read_csv("benchmark.csv")
 
-        wr.writeheader()
+    grafico_encriptacao(df)
+    grafico_decriptacao(df)
+
+def __salvar_resultado(resultados):
+    with open("benchmark.csv", "w", newline="", encoding="utf-8") as arquivo:
+        wr = csv.writer(arquivo)
+
+        wr.writerow([
+            "Algoritmo",
+            "Entrada(bytes)",
+            "Tempo de geração de chaves(ms)",
+            "Tempo médio de encriptação(ms)",
+            "Desvio padrão de encriptação(ms)",
+            "Tempo médio de decriptação(ms)",
+            "Desvio padrão da decriptação(ms)",
+            "Texto cifrado(bytes)"
+        ])
 
         for resultado in resultados:
-            wr.writerow(asdict(resultado))
+            wr.writerow(asdict(resultado).values())
