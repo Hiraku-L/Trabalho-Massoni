@@ -9,6 +9,7 @@ from .algoritmos.rsa import Rsa
 from .algoritmos.gm import Gm
 from .gerar_graficos.encriptacao import grafico_encriptacao
 from .gerar_graficos.decriptacao import grafico_decriptacao
+from .gerar_graficos.tam_texto_cifrado import grafico_tamanho_saida
 
 def main(argv: list[str] | None = None):
     parser = argparse.ArgumentParser()
@@ -52,6 +53,7 @@ def main(argv: list[str] | None = None):
 
     grafico_encriptacao(df)
     grafico_decriptacao(df)
+    grafico_tamanho_saida(df)
 
 def __salvar_resultado(resultados):
     with open("benchmark.csv", "w", newline="", encoding="utf-8") as arquivo:
