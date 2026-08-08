@@ -10,7 +10,9 @@ O programa realiza testes de desempenho dos algoritmos para diferentes tamanhos 
 
 Para executar os benchmarks, gerar a tabela com os resultados e criar os gráficos, basta executar:
 
+``bash
 python3 main.py
+``
 
 O programa irá gerar/atualizar o arquivo `benchmark.csv` e os gráficos de:
 
